@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa conceptual · Operaciones</title>
+<style>
+:root{--f:'Aptos Narrow','Aptos','Arial Narrow','Roboto Condensed',sans-serif-condensed,sans-serif;--ink:#2b2b2b}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;font-family:var(--f);color:var(--ink)}
+#bg{position:fixed;inset:0;overflow:hidden;background:linear-gradient(120deg,#ffd3e2,#ffeaf2,#ffc2d8,#ffdcee,#ffd3e2);background-size:400% 400%;animation:flow 16s ease infinite}
+@keyframes flow{50%{background-position:100% 50%}}
+.dr{position:absolute;left:-40vw;opacity:.6;animation:drift linear infinite;pointer-events:none}
+@keyframes drift{to{transform:translateX(160vw)}}
+.sp{position:absolute;animation:tw 4s ease-in-out infinite}
+@keyframes tw{50%{transform:translateY(-16px) scale(1.3);opacity:.4}}
+#view{position:fixed;inset:0 0 64px 0;overflow:hidden;cursor:grab;touch-action:none}
+#stage{position:absolute;left:0;top:0;width:2700px;height:1600px;transform-origin:0 0;transition:transform 1.3s cubic-bezier(.6,0,.2,1)}
+#stage.d{transition:none}
+#ln{position:absolute;inset:0;width:2700px;height:1600px}
+#ln path{fill:none;stroke-width:7;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s ease}
+#ln path.on{stroke-dashoffset:0}
+.n{position:absolute;translate:-50% -50%;transform:scale(0);transition:transform .8s cubic-bezier(.3,1.6,.5,1);z-index:2;cursor:pointer}
+.n.on{transform:scale(1)}.n.on:hover{transform:scale(1.04) rotate(-1deg)}
+.w{position:relative;animation:bob 6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.bg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(6px 8px 0 var(--sh))}
+.bg path{fill:var(--bg);stroke:var(--bd);stroke-width:5;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.in{position:relative;padding:21% 17% 18%;color:var(--tx);font-size:24px;line-height:1.2}
+.in b{display:block;font-size:1.5em;color:var(--ti);line-height:1;margin-bottom:.25em;font-weight:700}
+.x{display:none}.alt .m{display:none}.alt .x{display:block}
+.hx::after{content:"✨ tocá";position:absolute;right:15%;bottom:9%;font-size:19px;color:var(--tx)}
+.hx.alt::after{content:"↩"}
+.th{--bg:#fff;--tx:var(--ink);--ti:#6a4bd6;--bd:var(--ink);--sh:#d3a5b9}
+.lr{--bg:#141414;--tx:#f6e7b4;--ti:#e5b83c;--bd:#d4a62a;--sh:#8a6d17}
+.ba{--bg:#fff;--tx:#123a7a;--ti:#1f5fbf;--bd:#1f5fbf;--sh:#9fc0ee}
+.cr{--bg:#2f9e44;--tx:#fff;--ti:#ffe14a;--bd:#111;--sh:#111}
+.hub .in,.ce .in{text-align:center}
+.hub b{font-size:1.9em}.ce b{font-size:2.2em}
+.lg{display:block;height:84px;max-width:80%;margin:0 auto 8px;object-fit:contain;background:#fff;border-radius:16px;padding:6px}
+.em{font-size:64px;line-height:1.1}
+.ar{position:absolute;translate:-50% -50%;z-index:6;border:3px solid var(--ink);background:#ffe86b;border-radius:99px;padding:8px 24px;font:700 28px var(--f);color:var(--ink);cursor:pointer;white-space:nowrap;animation:pl 1.3s ease-in-out infinite;box-shadow:3px 4px 0 var(--ink)}
+.ar:hover{background:#fff}.ar span{display:inline-block;margin-left:8px}
+@keyframes pl{50%{scale:1.12}}
+#bar{position:fixed;bottom:0;left:0;right:0;height:64px;display:flex;gap:10px;align-items:center;justify-content:center;background:#fff;border-top:4px solid var(--ink);z-index:9;font-size:20px}
+button{font:inherit;border:3px solid var(--ink);border-radius:99px;padding:3px 18px;background:#ffe86b;color:var(--ink);cursor:pointer}
+button:hover{background:#fff}button:focus-visible{outline:3px solid #6a4bd6}
+#lbl{min-width:230px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bg"></div>
+<div id="view"><div id="stage"><svg id="ln" viewBox="0 0 2700 1600"></svg></div></div>
+<div id="bar"><button id="prev">◀ Atrás</button><span id="lbl"></span><button id="next">Siguiente ▶</button><button id="all">🔭 Ver todo</button><button id="rst">↺ Reiniciar</button></div>
+<script>
+const CL="M45 112 C15 112 6 76 32 68 C20 38 56 24 74 44 C84 12 128 10 138 40 C162 24 192 44 178 70 C202 80 192 112 160 112 Z";
+const col={th:'#2b2b2b',ce:'#2b2b2b',lr:'#d4a62a',ba:'#1f5fbf',cr:'#111'};
+const logo=(f,e)=>`<img class="lg" src="logos/${f}.png" alt="" onerror="this.outerHTML='<div class=em>${e}</div>'">`;
+// id, padre, x, y, ancho, clase, texto del botón-flecha, contenido
+const D=[
+["cen",null,1350,800,360,"th ce","", "<b>⚙️ Operaciones</b>3 empresas, 1 mirada"],
+["P","cen",850,400,460,"th","Teoría: demanda","<b>📈 Previsión de la demanda</b><span class=m>Estimar cuánto se va a pedir para reducir la incertidumbre. Puede tener tendencia, ciclos, estacionalidad y azar.</span><span class=x>Métodos cualitativos (experiencia) y cuantitativos (medias móviles, alisado exponencial). El error se mide con MAD y MAPE.</span>"],
+["Pl","cen",1850,400,460,"th","Teoría: personal","<b>👥 Planificación agregada y PMP</b><span class=m>Definir cuánta gente hace falta para cubrir la demanda, y qué producir, cuánto y cuándo.</span><span class=x>Estrategia de nivel (dotación estable), de persecución (se ajusta a la demanda) o mixta (una combinación).</span>"],
+["h1","cen",560,900,320,"lr hub","Le Roma",logo("leroma","🍨")+"<b>Le Roma</b>Helados artesanales"],
+["a1","h1",250,560,440,"lr","Demanda","<b>El clima manda</b><span class=m>Más de 330 baldes diarios en verano contra 150–180 en invierno. Un día cálido de invierno también dispara las ventas. Se revisa cada lunes.</span><span class=x>Un sabor “vence” al mes aunque sea consumible: prima la frescura artesanal. Los sabores nuevos se prueban con empleados y familiares.</span>"],
+["b1","h1",300,1260,440,"lr","Personal","<b>Estrategia mixta</b><span class=m>17 empleados que llegan a 22 en verano. Las vacaciones se concentran en invierno. Evalúan dos turnos para el verano 2027.</span><span class=x>Las paletas llevan más trabajo manual: el tiempo de elaboración define cuánta gente hace falta.</span>"],
+["h2","cen",1350,1150,320,"ba hub","Bálsamo",logo("balsamo","🔧")+"<b>Bálsamo</b>Autopartes"],
+["a2","h2",1020,1440,440,"ba","Demanda","<b>No todo rota igual</b><span class=m>Especialistas en autopartes, no multimarca. Algunos repuestos salen todos los días y otros casi nunca. Si suben las ventas totales, no sube todo.</span><span class=x>Tener piezas raras es su diferencial. Además usan InfoBal 10 para saber qué repuesto sirve a qué modelo.</span>"],
+["b2","h2",1680,1440,440,"ba","Personal","<b>Productividad sin sumar gente</b><span class=m>El depósito se ordena por rotación: lo más pedido queda a mano. Tres máquinas de envasado y tareas priorizadas, desde hoy hasta 60 días.</span><span class=x>Sin un PMP formal, esa lista de prioridades cumple su función: qué se hace primero.</span>"],
+["h3","cen",2140,900,320,"cr hub","CREA",logo("crea","🌱")+"<b>CREA</b>Red de innovación agropecuaria"],
+["a3","h3",2450,560,440,"cr","Demanda","<b>Anticipar necesidades</b><span class=m>Conecta productores con startups que ofrecen soluciones. Se apoyaría en estudios de mercado y juicio de expertos.</span><span class=x>Ojo: no nos confirmaron qué método usan. Es una interpretación nuestra desde la teoría.</span>"],
+["b3","h3",2400,1260,440,"cr","Personal","<b>Estrategia de nivel</b><span class=m>Estructura estable en Administración, Innovación y Coordinación, sin contratar o despedir cuando cambia la demanda.</span><span class=x>Los asesores de cada grupo los contrata y paga el propio grupo, no AACREA.</span>"],
+["end","cen",1350,150,640,"th","Cierre","<b>🔑 La idea central</b>La previsión dice qué va a pasar. La planificación decide con qué gente lo resolvemos."]
+];
+const order=D.map(d=>d[0]),N={};
+const stage=document.getElementById('stage'),view=document.getElementById('view'),ln=document.getElementById('ln');
+D.forEach(([id,par,x,y,w,cls,lab,html],i)=>{
+ const el=document.createElement('div');el.className='n '+cls.split(' ')[0]+(cls.includes('hub')?' hub':'')+(cls.includes('ce')?' ce':'');
+ el.style.cssText=`left:${x}px;top:${y}px;width:${w}px;--d:-${i*.7}s`;
+ el.innerHTML=`<div class="w${html.includes('class=x')?' hx':''}"><svg class="bg" viewBox="0 0 200 130" preserveAspectRatio="none"><path d="${CL}"/></svg><div class="in">${html}</div></div>`;
+ const w0=el.querySelector('.w');
+ el.onclick=()=>{if(w0.classList.contains('hx')){w0.classList.toggle('alt');el.classList.toggle('alt')}};
+ stage.appendChild(el);N[id]={id,par,x,y,cls:cls.split(' ')[0],lab,el,open:false,ar:null,path:null};
+});
+// quitar el doble toggle: la clase alt vive en .w y en .n (para .m/.x)
+const kids=id=>D.filter(d=>d[1]==id).map(d=>d[0]);
+function open(id){const n=N[id];if(n.open)return;
+ if(n.par)open(n.par);
+ n.open=true;n.el.classList.add('on');
+ if(n.ar){n.ar.remove();n.ar=null}
+ if(n.par){const p=N[n.par],mx=(p.x+n.x)/2,my=(p.y+n.y)/2,dx=n.x-p.x,dy=n.y-p.y,L=Math.hypot(dx,dy);
+  const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d',`M${p.x} ${p.y} Q${mx-dy/L*60} ${my+dx/L*60} ${n.x} ${n.y}`);
+  path.setAttribute('pathLength',1);path.setAttribute('stroke',col[n.cls]);ln.appendChild(path);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>path.classList.add('on')));n.path=path}
+ kids(id).forEach(k=>{const c=N[k];if(c.open||c.ar)return;
+  const dx=c.x-n.x,dy=c.y-n.y,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,rx=n.el.offsetWidth/2,ry=n.el.offsetHeight/2;
+  const e=rx*ry/Math.hypot(ry*ux,rx*uy)*.85+70;
+  const b=document.createElement('button');b.className='ar';b.style.left=n.x+ux*e+'px';b.style.top=n.y+uy*e+'px';
+  b.innerHTML=`${c.lab}<span style="transform:rotate(${Math.atan2(dy,dx)*180/Math.PI}deg)">➜</span>`;
+  b.onclick=ev=>{ev.stopPropagation();cur=order.indexOf(k);open(k);fly(k);lbl()};
+  stage.appendChild(b);c.ar=b});}
+let cam={x:1350,y:800,s:1},cur=0;
+const vh=()=>view.clientHeight;
+function apply(){stage.style.transform=`translate(${innerWidth/2-cam.x*cam.s}px,${vh()/2-cam.y*cam.s}px) scale(${cam.s})`}
+function fly(id){const n=N[id],p=n.par?N[n.par]:null;
+ cam={x:n.x+(p?(p.x-n.x)*.3:0),y:n.y+(p?(p.y-n.y)*.3:0),s:Math.min(innerWidth/1250,vh()/820)};apply()}
+function overview(){cam={x:1350,y:800,s:Math.min(innerWidth/2700,vh()/1600)*.97};apply()}
+function lbl(){document.getElementById('lbl').textContent=`Nube ${cur+1} de ${order.length}`}
+function go(i){cur=Math.max(0,Math.min(order.length-1,i));open(order[cur]);fly(order[cur]);lbl()}
+function reset(){ln.innerHTML='';D.forEach(d=>{const n=N[d[0]];n.open=false;n.el.classList.remove('on','alt');n.el.querySelector('.w').classList.remove('alt');if(n.ar){n.ar.remove();n.ar=null}});go(0)}
+next.onclick=()=>go(cur+1);prev.onclick=()=>go(cur-1);all.onclick=overview;rst.onclick=reset;
+addEventListener('keydown',e=>{if(e.key=='ArrowRight'||e.key==' '){e.preventDefault();go(cur+1)}if(e.key=='ArrowLeft')go(cur-1);if(e.key=='a')overview()});
+// arrastrar y zoom
+let dg=null;
+view.addEventListener('pointerdown',e=>{if(e.target.closest('.n,.ar'))return;dg=[e.clientX,e.clientY];stage.classList.add('d');view.style.cursor='grabbing'});
+addEventListener('pointermove',e=>{if(!dg)return;cam.x-=(e.clientX-dg[0])/cam.s;cam.y-=(e.clientY-dg[1])/cam.s;dg=[e.clientX,e.clientY];apply()});
+addEventListener('pointerup',()=>{dg=null;stage.classList.remove('d');view.style.cursor='grab'});
+let tm;view.addEventListener('wheel',e=>{e.preventDefault();stage.classList.add('d');cam.s=Math.max(.12,Math.min(2.5,cam.s*Math.exp(-e.deltaY*.001)));apply();clearTimeout(tm);tm=setTimeout(()=>stage.classList.remove('d'),200)},{passive:false});
+addEventListener('resize',apply);
+// fondo animado
+const bg=document.getElementById('bg');
+for(let i=0;i<8;i++){const d=document.createElement('div'),w=180+Math.random()*260;d.className='dr';
+ d.style.cssText=`top:${Math.random()*85}%;width:${w}px;animation-duration:${45+Math.random()*50}s;animation-delay:-${Math.random()*90}s`;
+ d.innerHTML=`<svg viewBox="0 0 200 130"><path d="${CL}" fill="#fff"/></svg>`;bg.appendChild(d)}
+for(let i=0;i<16;i++){const s=document.createElement('span');s.className='sp';s.textContent=['✨','💗','⭐','🍦'][i%4];
+ s.style.cssText=`left:${Math.random()*96}%;top:${Math.random()*92}%;font-size:${14+Math.random()*14}px;animation-delay:-${Math.random()*4}s;animation-duration:${3+Math.random()*3}s`;bg.appendChild(s)}
+go(0);
+</script>
+</body>
+</html>
