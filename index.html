@@ -170,7 +170,7 @@ function open(id){const n=N[id];if(n.open)return;
   const place=()=>{b.style.left=n.x+ux*e+'px';b.style.top=n.y+uy*e+'px'};place();
   /* zona del texto que va debajo de la esfera: el botón se aleja por su misma línea hasta no tocarla */
   const lab=n.el.querySelector('.lab');
-  if(lab&&lab.offsetHeight){const M=26,lw=lab.offsetWidth,lh=lab.offsetHeight,y0=n.y+r+18,
+  if(lab&&lab.offsetHeight){const M=44,lw=lab.offsetWidth,lh=lab.offsetHeight,y0=n.y+r+18,
    box=[n.x-lw/2-M,y0-M,n.x+lw/2+M,y0+lh+M],w=b.offsetWidth,h=b.offsetHeight;
    const hit=()=>{const cx=n.x+ux*e,cy=n.y+uy*e;return cx+w/2>box[0]&&cx-w/2<box[2]&&cy+h/2>box[1]&&cy-h/2<box[3]};
    let g=0;while(hit()&&g++<600)e+=4;place()}
