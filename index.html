@@ -38,10 +38,10 @@ html,body{height:100%;overflow:hidden;font-family:var(--f);color:#e8f0ff;backgro
 .in{padding:0 8%;font-size:24px;line-height:1.1}
 .sun .in{font-size:52px;font-weight:700;line-height:1;padding:0 12%}
 .sat .in{font-size:84px;line-height:1}
-.lab{position:absolute;left:50%;top:calc(100% + 18px);translate:-50% 0;width:440px;text-align:center;color:#fff;line-height:1.15;pointer-events:none}
+.lab{position:absolute;left:50%;top:calc(100% + 18px);translate:-50% 0;width:440px;max-width:440px;text-align:center;color:#fff;line-height:1.2;pointer-events:none;overflow-wrap:break-word}
 .lab .c{display:block;color:var(--ac);font-size:24px;font-weight:700}
 .lab b{display:block;font-size:34px;margin:2px 0 4px}
-.lab .s{display:block;color:#a9b9d8;font-size:22px}
+.lab .s{display:block;color:#d1dcf4;font-size:22px;max-width:100%;text-wrap:pretty}
 .lab i{display:block;font-style:normal;color:var(--cy);font-size:20px;margin-top:4px}
 .sun{--g1:#fff6b8;--g2:#ffc933;--g3:#e8530e;--tx:#4a1d00;--ac:#ffc94d;--hd:#b3410e;--ht:#fff}
 .s1{--g1:#e3d6ff;--g2:#8a6bff;--g3:#3a1fa0;--glow:#9b7bffcc;--r1:#9b7bff;--tx:#fff;--ac:#c9b6ff;--hd:#3a1fa0;--ht:#fff}
@@ -53,7 +53,7 @@ html,body{height:100%;overflow:hidden;font-family:var(--f);color:#e8f0ff;backgro
 .ar{position:absolute;translate:-50% -50%;z-index:6;border:3px solid var(--cy);background:#07142bdd;border-radius:99px;padding:12px 34px;font:700 42px var(--f);color:#fff;cursor:pointer;white-space:nowrap;animation:pl 1.3s ease-in-out infinite;box-shadow:0 0 28px #29c4ff99}
 .ar:hover{background:#0f3d8f}.ar span{display:inline-block;margin-left:12px;font-size:1.3em;line-height:1;color:var(--cy)}
 @keyframes pl{50%{scale:1.1}}
-#pn{position:fixed;right:0;top:0;bottom:64px;width:min(520px,92vw);z-index:10;background:#0a1124f2;color:#dbe6ff;border-left:4px solid var(--ac,#29c4ff);transform:translateX(105%);transition:transform .5s cubic-bezier(.3,.9,.3,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px #000a}
+#pn{display:none!important;position:fixed;right:0;top:0;bottom:64px;width:min(520px,92vw);z-index:10;background:#0a1124f2;color:#dbe6ff;border-left:4px solid var(--ac,#29c4ff);transform:translateX(105%);transition:transform .5s cubic-bezier(.3,.9,.3,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px #000a}
 #pn.on{transform:none}
 .ph{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--hd);color:var(--ht)}
 .ph img{width:150px;border-radius:10px}
@@ -89,31 +89,31 @@ const D=[
  {t:"Operaciones",c:["Idea central"],i:[["Previsión de la demanda","Estimar qué se va a pedir en el futuro para reducir la incertidumbre. Se apoya en métodos cualitativos y cuantitativos, y se corrige midiendo el error (MAD y MAPE)."],["Planificación agregada y PMP","Define los recursos y la fuerza laboral para cubrir la demanda prevista (estrategia de nivel, de persecución o mixta). El PMP establece qué producir, cuánto y cuándo."],["Conclusión","La previsión dice qué va a pasar. La planificación decide con qué gente lo resolvemos."]]}],
 ["h1","cen",650,900,320,"lr hub k","Le Roma",logo('lr')+"Helados artesanales",
  {t:"Le Roma",c:["Empresa visitada"],i:[["Qué hace","Elabora helados artesanales con múltiples sabores y puntos de venta."],["Ritmo de producción","Más de 330 baldes diarios en verano y 150–180 en invierno. Venden durante todo el año."],["Calidad","Un sabor se considera vencido al mes aunque siga siendo consumible: priorizan frescura y producto artesanal."]]}],
-["a1","h1",240,380,420,"lr k","Demanda","<small>Previsión de la demanda</small><b>El clima manda</b>Verano: +330 baldes diarios. Invierno: 150–180. Feriados, ventas y stock también pesan. Se revisa cada lunes.",
+["a1","h1",240,380,420,"lr k","Demanda","<small>Previsión de la demanda</small><b>Demanda estacional</b>La estacionalidad y las ventas históricas orientan la producción, que se ajusta semanalmente.",
  {t:"Le Roma · Demanda",c:["Previsión de la demanda","Estacionalidad","Método cualitativo"],i:[["Estacionalidad","Más de 330 baldes diarios en verano contra 150–180 en invierno. Igual venden todo el año."],["Más que la temporada","El clima de cada jornada, los feriados, las ventas históricas y el stock influyen. Un día cálido de invierno puede generar demanda alta; uno fresco de verano, menor a la esperada."],["Revisión semanal","Cada lunes se analiza la información comercial y se ajustan las cantidades a producir."],["Sucursal Mendoza","Estimación inicial y abastecimiento para unos 15 días. Sin datos históricos hay más incertidumbre: si se vende menos, se reducen los envíos y la producción."],["Sabores nuevos","Los prueban empleados de planta y sus familiares (método cualitativo). Después se evalúa con ventas reales si el sabor es permanente o temporal."],["Riesgo de errar","Faltantes de sabores muy pedidos o acumulación de mercadería refrigerada."]]}],
-["b1","h1",240,1420,420,"lr k","Personal","<small>Planificación agregada y PMP</small><b>Estrategia mixta</b>17 empleados, hasta 22 en verano con temporarios. Vacaciones en invierno y 2 turnos en evaluación para 2027.",
+["b1","h1",240,1420,420,"lr k","Personal","<small>Planificación agregada y PMP</small><b>Personal y capacidad</b>Mantiene personal estable y contrata trabajadores temporarios en verano. Evalúa incorporar un segundo turno de producción.",
  {t:"Le Roma · Personal",c:["Planificación agregada","Estrategia mixta","PMP"],i:[["Dotación","17 trabajadores normalmente y hasta 22 en verano, con personal temporario."],["Por qué","Mantener la dotación máxima todo el año sería costoso cuando la producción baja. Por eso las vacaciones se concentran en invierno."],["Dos turnos","Evalúan implementarlos para el verano 2027: más capacidad sin sumar tantos temporarios."],["Relación con el PMP","La programación de sabores y cantidades distribuye las tareas. Las paletas requieren más trabajo manual, y su tiempo de elaboración define cuánta gente hace falta."]]}],
 ["h2","cen",1450,1430,320,"ba hub k","Bálsamo",logo('ba')+"Autopartes",
  {t:"Bálsamo",c:["Empresa visitada"],i:[["Qué hace","Comercializa y distribuye autopartes. Son especialistas: no trabajan multimarca."],["Marcas y familias","Repuestos para Renault, Volkswagen y Nissan, en familias como motor, frenos, suspensión, transmisión, electricidad y carrocería."],["Diferencial","Responden pedidos técnicos muy específicos que otros comercios multimarca generalmente no trabajan."]]}],
-["a2","h2",830,1790,420,"ba k","Demanda","<small>Previsión de la demanda</small><b>No todo rota igual</b>Repuestos de alta rotación y otros esporádicos. Especialistas, no multimarca. InfoBal 10 identifica cada aplicación.",
+["a2","h2",830,1790,420,"ba k","Demanda","<small>Previsión de la demanda</small><b>Demanda irregular</b>Su desafío es atender repuestos específicos cuya demanda es baja o irregular.",
  {t:"Bálsamo · Demanda",c:["Previsión de la demanda","Rotación de inventarios"],i:[["Rotación desigual","Algunos artículos rotan mucho y otros tienen demanda reducida o esporádica. Que suban las ventas totales no significa que todo salga más."],["Cómo deciden","Usan información de ventas y movimiento de inventarios. La rotación también define dónde se ubica cada producto en el depósito."],["Valor agregado","Mantener piezas de baja demanda es parte de su diferenciación: responden pedidos técnicos que otros no resuelven."],["InfoBal 10","Herramienta de consulta técnica que indica para qué modelos de vehículos sirve cada repuesto."],["El equilibrio","Costo de mantener productos de baja demanda frente a garantizar disponibilidad y asesoramiento especializado."]]}],
-["b2","h2",2070,1790,420,"ba k","Personal","<small>Planificación agregada y PMP</small><b>Depósito eficiente</b>Lo más pedido queda a mano. 3 máquinas de envasado. Tareas priorizadas de hoy a 60 días.",
+["b2","h2",2070,1790,420,"ba k","Personal","<small>Planificación agregada y PMP</small><b>Organización del depósito</b>Mantiene una estructura estable y organiza las tareas del depósito y la preparación de pedidos según las prioridades de entrega.",
  {t:"Bálsamo · Personal",c:["Planificación agregada","Productividad","PMP"],i:[["Tareas del personal","Recepción, almacenamiento, envasado y preparación de pedidos."],["Productividad sin sumar gente","Los repuestos más solicitados están en lugares accesibles: se reduce el tiempo de búsqueda y cada trabajador prepara más pedidos."],["Programa de prioridades","Tres máquinas de envasado y sectores manuales. Las tareas van desde productos necesarios el mismo día hasta otros programados con 60 días de anticipación."],["Relación con el PMP","Aunque no haya un PMP formal, el programa define qué se hace primero y distribuye el trabajo."]]}],
 ["h3","cen",2250,900,320,"cr hub k","CREA",logo('cr')+"Red agropecuaria",
  {t:"CREA",c:["Organización visitada"],i:[["Qué es","AACREA: una organización que funciona como red de innovación agropecuaria."],["Área de Innovación","Es el nexo entre productores con problemáticas específicas y profesionales o emprendedores con soluciones. Presentan sus propuestas en una plataforma, con requisitos previos."],["Importante","En la visita no se explicó qué método de previsión usan. Nuestro análisis es una interpretación desde la teoría."]]}],
-["a3","h3",2660,380,420,"cr k","Demanda","<small>Previsión de la demanda</small><b>Anticipar necesidades</b>Nexo entre productores y startups. Estudio de mercado y juicio de expertos (interpretación nuestra).",
+["a3","h3",2660,380,420,"cr k","Demanda","<small>Previsión de la demanda</small><b>Anticipar necesidades</b>La previsión permite anticipar nuevos miembros y necesidades de asesoramiento, complementando opiniones con datos históricos.",
  {t:"CREA · Demanda",c:["Previsión de la demanda","Métodos cualitativos"],i:[["Qué hay que anticipar","Nuevos miembros y las necesidades de quienes participan en la red."],["Métodos cualitativos","Estudio de mercado del consumidor (relevar problemáticas de los productores) y jurado de opinión ejecutiva (experiencia de asesores y especialistas)."],["Complemento cuantitativo","Registros históricos de nuevos miembros, desafíos presentados y vinculaciones para detectar tendencias."],["Para qué sirve","Planificar recursos y profesionales y acompañar el crecimiento sin perder calidad. No se confirmó que lo apliquen formalmente."]]}],
-["b3","h3",2660,1420,420,"cr k","Personal","<small>Planificación agregada y PMP</small><b>Estrategia de nivel</b>Estructura estable en Administración, Innovación y Coordinación. Asesores pagados por cada grupo.",
+["b3","h3",2660,1420,420,"cr k","Personal","<small>Planificación agregada y PMP</small><b>Estructura estable</b>Mantiene una estructura estable y busca equilibrar la cantidad de profesionales, la calidad del servicio y los costos laborales.",
  {t:"CREA · Personal",c:["Planificación agregada","Estrategia de nivel"],i:[["Servicio basado en personas","La capacidad de respuesta depende de la cantidad de trabajadores, sus conocimientos y el tiempo que dedican a cada actividad."],["Estructura AACREA","Administración y Finanzas, Innovación, Investigación y Desarrollo, Comunicación, Gestión de Personas y Coordinación Regional."],["Asesores técnicos","Según el Manual del Miembro, los contrata y paga cada grupo, que acuerda honorarios y dedicación. No son costo de la estructura central."],["Estrategia de nivel","Mantiene una estructura relativamente estable y atiende con personal permanente, sin contratar o despedir según la demanda."],["Aclaración","Productores, emprendedores y startups de la red no son empleados remunerados."]]}]
 ];
 
 const POS={a1:[300,380,'S1'],a2:[230,1000,'S1'],a3:[300,1620,'S1'],b1:[3100,380,'S2'],b2:[3170,1000,'S2'],b3:[3100,1620,'S2']};
 const E=[
-{id:'cen',par:null,x:1700,y:1000,d:420,k:'sun',cls:'sun',arrow:'',inner:'<b>Gestión de Operaciones</b>',label:'<i>＋ ficha</i>',
+{id:'cen',par:null,x:1700,y:1000,d:420,k:'sun',cls:'sun',arrow:'',inner:'<b>Gestión de Operaciones</b>',label:'',
  fi:{t:'Gestión de Operaciones',c:['Sol del sistema'],i:[['Idea central','Dos sistemas giran alrededor de la gestión de operaciones: la previsión de la demanda (qué va a pasar) y la planificación agregada (con qué recursos lo resolvemos).'],['Las 3 empresas','Le Roma, Bálsamo y CREA aparecen en ambos sistemas: cada una se analiza desde la demanda y desde el personal.'],['Conclusión','La previsión dice qué va a pasar. La planificación decide con qué gente lo resolvemos.']]}},
-{id:'S1',par:'cen',x:860,y:1000,d:240,k:'sys',cls:'s1',arrow:'Demanda',inner:'📈',label:'<span class="c">Sistema 1</span><b>Previsión de la demanda</b><span class="s">Anticipar cuánto se va a pedir.</span><i>＋ ficha</i>',
+{id:'S1',par:'cen',x:860,y:1000,d:240,k:'sys',cls:'s1',arrow:'Demanda',inner:'📈',label:'<span class="c">Sistema 1</span><b>Previsión de la demanda</b><span class="s">Anticipar cuánto se va a pedir.</span>',
  fi:{t:'Previsión de la demanda',c:['Sistema 1','Teoría'],i:[['Qué es','Estimar la cantidad de productos o servicios que se requerirán en un período futuro, para reducir la incertidumbre y anticipar decisiones de producción, inventarios, capacidad y recursos.'],['Componentes de la demanda','Tendencia, ciclos, estacionalidad y variaciones aleatorias.'],['Métodos','Cualitativos (experiencia y conocimiento del mercado) y cuantitativos (medias móviles, medias móviles ponderadas y alisado exponencial).'],['Control del error','Comparar la previsión con la demanda real, medir el error con MAD y MAPE y actualizar los pronósticos cuando cambian las condiciones.'],['Si se prevé mal','Subestimar produce faltantes; sobreestimar genera inventarios excesivos y mayores costos.']]}},
-{id:'S2',par:'cen',x:2540,y:1000,d:240,k:'sys',cls:'s2',arrow:'Planificación',inner:'👥',label:'<span class="c">Sistema 2</span><b>Planificación agregada y PMP</b><span class="s">Definir con qué gente y qué producir.</span><i>＋ ficha</i>',
+{id:'S2',par:'cen',x:2540,y:1000,d:240,k:'sys',cls:'s2',arrow:'Planificación',inner:'👥',label:'<span class="c">Sistema 2</span><b>Planificación agregada y PMP</b><span class="s">Definir con qué gente y qué producir.</span>',
  fi:{t:'Planificación agregada y PMP',c:['Sistema 2','Teoría'],i:[['Planificación agregada','Determina los recursos necesarios para satisfacer la demanda prevista en el mediano plazo, con foco en la fuerza laboral: cuántos empleados y cómo organizar sus tareas, equilibrando capacidad y costos.'],['Estrategias','De nivel (dotación estable), de persecución (se ajusta el personal a la demanda) o mixta (combina ambas).'],['Plan Maestro de Producción (PMP)','Establece qué producir, en qué cantidades y cuándo, y permite organizar los recursos humanos. En servicios o distribución se relaciona con programar actividades y asignar personal, aunque no haya un PMP formal.']]}}
 ];
 ['a1','a2','a3','S2x','b1','b2','b3'].forEach(id=>{
@@ -123,7 +123,7 @@ const E=[
  const tt=t.querySelector('b').textContent;t.querySelector('b').remove();
  const fi=d[8];fi.i=[['Empresa',INTRO[cls]],...fi.i];
  E.push({id,par:p[2],x:p[0],y:p[1],d:210,k:'pl',cls,arrow:NAME[cls],inner:logo(cls),
-  label:`<span class="c">${NAME[cls]}</span><b>${tt}</b><span class="s">${t.textContent}</span><i>＋ ficha</i>`,fi});
+  label:`<span class="c">${NAME[cls]}</span><b>${tt}</b><span class="s">${t.textContent}</span>`,fi});
 });
 const ord=['cen','S1','a1','a2','a3','S2','b1','b2','b3'];
 const order=ord,N={};
@@ -137,7 +137,7 @@ E.sort((a,b)=>ord.indexOf(a.id)-ord.indexOf(b.id)).forEach((n,i)=>{
  const el=document.createElement('div');el.className='n '+n.cls+(n.k=='pl'||n.k=='sys'?' sat':'');
  el.style.cssText=`left:${n.x}px;top:${n.y}px;width:${n.d}px;--d:-${i*.9}s`;
  el.innerHTML=`<div class="w"><div class="in">${n.inner}</div><div class="lab">${n.label}</div></div>`;
- el.onclick=()=>showPanel(n.id);
+ el.onclick=null;el.style.cursor="default";
  stage.appendChild(el);Object.assign(n,{el,open:false,ar:null});N[n.id]=n;
 });
 function showPanel(id){const n=N[id],f=n.fi,l=LG[n.cls];
@@ -182,7 +182,7 @@ function reset(){ln.innerHTML='';orbits();pn.classList.remove('on');pw=0;E.forEa
 next.onclick=()=>{if(pn.classList.contains('on')){pn.classList.remove('on');pw=0}go(cur+1)};
 prev.onclick=()=>{if(pn.classList.contains('on')){pn.classList.remove('on');pw=0}go(cur-1)};
 all.onclick=overview;rst.onclick=reset;
-addEventListener('keydown',e=>{if(e.key=='ArrowRight'||e.key==' '){e.preventDefault();next.onclick()}if(e.key=='ArrowLeft')prev.onclick();if(e.key=='a')overview();if(e.key=='Escape')hidePanel();if(e.key=='Enter')showPanel(order[cur])});
+addEventListener('keydown',e=>{if(e.key=='ArrowRight'||e.key==' '){e.preventDefault();next.onclick()}if(e.key=='ArrowLeft')prev.onclick();if(e.key=='a')overview();if(e.key=='Escape')hidePanel();});
 let dg=null;
 view.addEventListener('pointerdown',e=>{if(e.target.closest('.n,.ar'))return;dg=[e.clientX,e.clientY];stage.classList.add('d');view.style.cursor='grabbing'});
 addEventListener('pointermove',e=>{if(!dg)return;cam.x-=(e.clientX-dg[0])/cam.s;cam.y-=(e.clientY-dg[1])/cam.s;dg=[e.clientX,e.clientY];apply()});
